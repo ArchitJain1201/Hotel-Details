@@ -11,6 +11,6 @@ data class HotelListingEntity(
     val name: String?,
     val city: String?,
     val img: List<String>?,
-    val stars: String?,
-    val rating: String?,
+    val stars: Int?,
+    val rating: Float?,
 )

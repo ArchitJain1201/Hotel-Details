@@ -30,7 +30,6 @@ class HotelRepositoryImpl @Inject constructor(
     ): Flow<Resource<List<HotelListing>>> {
         return flow {
             emit(Resource.Loading(true))
-
             val localListings = dao.searchHotelListing(query)
             emit(Resource.Success(
                 data = localListings.map { it.toHotelListing() }

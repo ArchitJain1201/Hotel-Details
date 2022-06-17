@@ -7,7 +7,7 @@ data class HotelListingDto(
     @field:Json(name = "name") val name: String?,
     @field:Json(name = "city") val city: String?,
     @field:Json(name = "images") val img: List<String>?,
-    @field:Json(name = "stars") val stars: String?,
-    @field:Json(name = "rating") val rating: String?,
+    @field:Json(name = "stars") val stars: Int?,
+    @field:Json(name = "rating") val rating: Float?,
 )
 //TODO: Take Rating first 4 digit

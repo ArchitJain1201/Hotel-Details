@@ -1,6 +1,8 @@
 package com.archit.hoteldetails.di
 
+import com.archit.hoteldetails.data.repository.AuthRespositoryImpl
 import com.archit.hoteldetails.data.repository.HotelRepositoryImpl
+import com.archit.hoteldetails.domain.respository.AuthRepository
 import com.archit.hoteldetails.domain.respository.HotelRepository
 import dagger.Binds
 import dagger.Module
@@ -16,4 +18,10 @@ abstract class RepositoryModule {
     abstract fun bindHotelRepository(
         hotelRepositoryImpl: HotelRepositoryImpl
     ): HotelRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindAuthRepository(
+        authRepositoryImpl: AuthRespositoryImpl
+    ): AuthRepository
 }

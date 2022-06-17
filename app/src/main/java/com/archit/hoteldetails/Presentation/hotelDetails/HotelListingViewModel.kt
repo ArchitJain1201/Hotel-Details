@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.archit.hoteldetails.domain.respository.AuthRepository
 import com.archit.hoteldetails.domain.respository.HotelRepository
 import com.archit.hoteldetails.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,10 +16,12 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HotelListingViewModel @Inject constructor(
-    private val repository: HotelRepository
+    private val repository: HotelRepository,
+    private val authRepository: AuthRepository
 ): ViewModel() {
 
     var state by mutableStateOf(HotelListingState())
+
 
     private var searchJob: Job? = null
 
@@ -41,6 +44,11 @@ class HotelListingViewModel @Inject constructor(
             }
         }
     }
+    fun logout(){
+        viewModelScope.launch {
+            authRepository.signOut()
+        }
+    }
 
     private fun getHotelListing(
         query: String = state.searchQuery.lowercase(),
@@ -54,7 +62,7 @@ class HotelListingViewModel @Inject constructor(
                         is Resource.Success -> {
                             result.data?.let { listings ->
                                 state = state.copy(
-                                    companies = listings
+                                    hotels = listings
                                 )
                             }
                         }

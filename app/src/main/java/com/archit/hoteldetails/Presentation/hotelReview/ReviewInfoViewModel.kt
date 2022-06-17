@@ -25,24 +25,47 @@ class ReviewInfoViewModel @Inject constructor(
         viewModelScope.launch {
             val id = savedStateHandle.get<String>("id") ?: return@launch
             state = state.copy(isLoading = true)
-            val reviewInfoResult = async { repository.getReviewInfo(id) }
-            when(val result = reviewInfoResult.await()) {
-                is Resource.Success -> {
-                    state = state.copy(
-                        reviewInfo = result.data,
-                        isLoading = false,
-                        error = null
-                    )
+            repository
+                .getReviewInfo(id)
+                .collect{ result ->
+                    when(result) {
+                        is Resource.Success -> {
+                            result.data?.let { listings ->
+                                state = state.copy(
+                                    reviewInfo = listings
+                                )
+                            }
+                        }
+                        is Resource.Error -> {
+                            state = state.copy(
+                                error = result.message,
+                            )
+                        }
+                        is Resource.Loading -> {
+                            state = state.copy(
+                                isLoading = result.isLoading
+                            )
+                        }
+                    }
                 }
-                is Resource.Error -> {
-                    state = state.copy(
-                        isLoading = false,
-                        error = result.message,
-                        reviewInfo = null
-                    )
-                }
-                else -> Unit
-            }
+//            val reviewInfoResult = async { repository.getReviewInfo(id) }
+//            when(val result = reviewInfoResult.await()) {
+//                is Resource.Success -> {
+//                    state = state.copy(
+//                        reviewInfo = result.data,
+//                        isLoading = false,
+//                        error = null
+//                    )
+//                }
+//                is Resource.Error -> {
+//                    state = state.copy(
+//                        isLoading = false,
+//                        error = result.message,
+//                        reviewInfo = null
+//                    )
+//                }
+//                else -> Unit
+//            }
         }
     }
 }
