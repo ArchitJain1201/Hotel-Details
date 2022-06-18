@@ -21,7 +21,7 @@ kotlin {
 
 android {
     compileSdk 32
-
+    buildToolsVersion "30.0.2"
     defaultConfig {
         applicationId "com.archit.hoteldetails"
         minSdk 21
