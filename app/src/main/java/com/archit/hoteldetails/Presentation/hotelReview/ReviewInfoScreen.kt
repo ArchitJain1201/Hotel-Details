@@ -19,10 +19,12 @@ import com.archit.hoteldetails.ui.theme.DarkBlue
 import com.archit.hoteldetails.utils.createNotificationChannel
 import com.archit.hoteldetails.utils.simpleNotification
 import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 @Composable
 @Destination
 fun ReviewInfoScreen(
+    navigator: DestinationsNavigator,
     id: String,
     viewModel: ReviewInfoViewModel = hiltViewModel()
 ) {

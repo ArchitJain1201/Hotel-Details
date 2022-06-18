@@ -13,13 +13,13 @@ interface HotelDto {
         hotelListingEntites: List<HotelListingEntity>
     )
 
-    @Query("DELETE FROM hotellisitngentity")
+    @Query("DELETE FROM hotellistingentity")
     suspend fun clearHotelListing()
 
     @Query(
         """
             SELECT *
-            FROM hotellisitngentity
+            FROM hotellistingentity
             WHERE LOWER(name) LIKE :query
         """
     )

@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.archit.hoteldetails.Presentation.destinations.ReviewInfoScreenDestination
 import com.archit.hoteldetails.utils.createNotificationChannel
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
@@ -23,7 +24,7 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 @Composable
 fun HotelListingScreen(
     navigator: DestinationsNavigator,
-    viewModel: HotelListingViewModel = hiltViewModel(),
+    viewModel: HotelListingViewModel = hiltViewModel()
 ) {
     val swipeRefreshState = rememberSwipeRefreshState(
         isRefreshing = viewModel.state.isRefreshing
@@ -75,7 +76,7 @@ fun HotelListingScreen(
                             .padding(10.dp)
                             .clickable {
                                 navigator.navigate(
-                                    ReviewInfoScreenDestination(hotel.id)
+                                    ReviewInfoScreenDestination(hotel.id!!)
                                 )
                             }
                     )
