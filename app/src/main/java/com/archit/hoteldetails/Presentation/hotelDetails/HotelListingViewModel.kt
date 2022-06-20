@@ -44,6 +44,7 @@ class HotelListingViewModel @Inject constructor(
             }
         }
     }
+
     fun logout(){
         viewModelScope.launch {
             authRepository.signOut()

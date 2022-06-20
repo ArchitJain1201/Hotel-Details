@@ -8,6 +8,7 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import javax.inject.Singleton
 
 @Module
@@ -21,6 +22,7 @@ abstract class RepositoryModule {
 
     @Binds
     @Singleton
+    @ExperimentalCoroutinesApi
     abstract fun bindAuthRepository(
         authRepositoryImpl: AuthRespositoryImpl
     ): AuthRepository

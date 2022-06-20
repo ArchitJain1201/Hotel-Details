@@ -4,6 +4,9 @@ import android.app.Application
 import androidx.room.Room
 import com.archit.hoteldetails.data.local.HotelDatabase
 import com.archit.hoteldetails.data.remote.HotelApi
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -39,5 +42,11 @@ object AppModule {
             HotelDatabase::class.java,
             "hoteldb.db"
         ).build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideFirebaseAuth(): FirebaseAuth {
+        return Firebase.auth
     }
 }
